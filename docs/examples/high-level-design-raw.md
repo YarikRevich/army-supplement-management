@@ -11,7 +11,6 @@ header
 Diagram may be updated.
 endheader
 
-together {
 cloud "Staff" as staff {
     node "Administrative" as staff_administrative
     node "General" as staff_general
@@ -35,22 +34,21 @@ cloud "Equipment inventory" as equipment_inventory {
     node "Attachments disposition" as equipment_attachments_disposition
     node "Attachments type" as equipment_attachments_type
 
-    equipment_arms_assignments -[#blue]--> equipment_arms_disposition
-    equipment_arms_assignments -[#blue]--> equipment_arms_type
-    equipment_arms_assignments -[#blue]-> staff_inventory_holders
+    equipment_arms_assignments <--[#blue]--> equipment_arms_disposition
+    equipment_arms_assignments <--[#blue]--> equipment_arms_type
+    equipment_arms_assignments <--[#blue]-> staff_inventory_holders
     
-    equipment_medicine_assignments -[#blue]--> equipment_medicine_disposition
-    equipment_medicine_assignments -[#blue]--> equipment_medicine_type
-    equipment_medicine_assignments -[#blue]--> staff_inventory_holders
+    equipment_medicine_assignments <--[#blue]--> equipment_medicine_disposition
+    equipment_medicine_assignments <--[#blue]--> equipment_medicine_type
+    equipment_medicine_assignments <-[#blue]--> staff_inventory_holders
     
-    equipment_vehicles_assignments -[#blue]--> equipment_vehicles_disposition
-    equipment_vehicles_assignments -[#blue]--> equipment_vehicles_type
-    equipment_vehicles_assignments -[#blue]--> staff_inventory_holders
+    equipment_vehicles_assignments <--[#blue]--> equipment_vehicles_disposition
+    equipment_vehicles_assignments <-[#blue]--> equipment_vehicles_type
+    equipment_vehicles_assignments <-[#blue]--> staff_inventory_holders
 
-    equipment_attachments_assignments -[#blue]--> equipment_attachments_disposition
-    equipment_attachments_assignments -[#blue]--> equipment_attachments_type
-    equipment_attachments_assignments -[#blue]--> staff_inventory_holders
-}
+    equipment_attachments_assignments <-[#blue]--> equipment_attachments_disposition
+    equipment_attachments_assignments <-[#blue]--> equipment_attachments_type
+    equipment_attachments_assignments <-[#blue]--> staff_inventory_holders
 }
 
 together {
@@ -63,9 +61,9 @@ cloud "Administration" as administration {
     node "Permissions" as administration_permissions
     node "Permission entries" as administration_permission_entries
     
-    administration_deployment_records -[#brown]--> staff_administrative
-    administration_trainings -[#brown]--> administration_trainings_topic
-    administration_permissions -[#brown]--> administration_permission_entries
+    administration_deployment_records <--[#brown]--> staff_administrative
+    administration_trainings <--[#brown]--> administration_trainings_topic
+    administration_permissions <--[#brown]--> administration_permission_entries
 }
 
 cloud "Logistics" as logistics {
@@ -73,8 +71,8 @@ cloud "Logistics" as logistics {
     node "Route" as logistics_route
     node "Cargo" as logistics_cargo 
 
-    logistics_assignments -[#red]--> logistics_route
-    logistics_assignments -[#red]--> logistics_cargo
+    logistics_assignments <--[#red]-> logistics_route
+    logistics_assignments <--[#red]-> logistics_cargo
 }
 }
 
@@ -88,15 +86,17 @@ cloud "Communication" as communication {
     node "Equipment inventory journal" as equipment_inventory_journal
     node "Equipment inventory journal topic" as equipment_inventory_journal_topic
     
-    logistics_journal -[#green]--> logistics_journal_topic
-    administration_journal -[#green]--> administration_journal_topic
-    equipment_inventory_journal -[#green]--> equipment_inventory_journal_topic
+    logistics_journal <-[#green]--> logistics_journal_topic
+    administration_journal <-[#green]--> administration_journal_topic
+    equipment_inventory_journal <-[#green]--> equipment_inventory_journal_topic
     
-    logistics_journal -[#green]--> logistics_assignments
-    logistics_journal -[#green]--> staff_administrative
-    logistics_journal -[#green]--> staff_general
+    logistics_journal <-[#green]--> logistics_assignments
+    logistics_journal <--[#green]--> staff_administrative
+    logistics_journal <--[#green]--> staff_general
     
-    administration_journal -[#green]--> staff_administrative
-    administration_journal -[#green]--> staff_general 
+    administration_journal <--[#green]--> staff_administrative
+    administration_journal <--[#green]--> staff_general 
 }
+
+footer "Topology represents only one military base out of global topology structure"
 ```
