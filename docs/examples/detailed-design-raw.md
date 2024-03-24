@@ -1,5 +1,7 @@
 ```plantuml
 !pragma teoz true
+skinparam nodesep 5
+skinparam ranksep 300
 skinparam linetype ortho
 
 title 
