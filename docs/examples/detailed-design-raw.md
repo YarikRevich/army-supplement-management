@@ -1,9 +1,10 @@
 ```plantuml
 !pragma teoz true
-skinparam nodesep 100
-skinparam ranksep 300
-scale 200 width
-scale 800 height
+left to right direction
+skinparam nodesep 20
+skinparam ranksep 80
+scale 300 width
+scale 2000 height
 skinparam linetype ortho
 
 title 
@@ -37,7 +38,7 @@ entity "staff_rank" {
     name : varchar<20>
 }
 
-staff_personnel }o...o{ staff_rank
+staff_personnel }|...|| staff_rank
 
 }
 
@@ -111,17 +112,17 @@ entity "equipment_inventory_attachments_type" {
     compatability : varchar<10>
 }
 
-equipment_inventory_arms_assignments }o...o{ equipment_inventory_arms_disposition
-equipment_inventory_arms_assignments }o...o{ staff_personnel
-equipment_inventory_arms_disposition }o...|| equipment_inventory_arms_type
+equipment_inventory_arms_assignments }|...|| equipment_inventory_arms_disposition
+equipment_inventory_arms_assignments }|...|| staff_personnel
+equipment_inventory_arms_disposition }|...|| equipment_inventory_arms_type
 
-equipment_inventory_vehicles_assignments }o...o{ equipment_inventory_vehicles_disposition
-equipment_inventory_vehicles_assignments }o...o{ staff_personnel
-equipment_inventory_vehicles_disposition }o...|| equipment_inventory_vehicles_type
+equipment_inventory_vehicles_assignments }|...|| equipment_inventory_vehicles_disposition
+equipment_inventory_vehicles_assignments }|...|| staff_personnel
+equipment_inventory_vehicles_disposition }|...|| equipment_inventory_vehicles_type
 
-equipment_inventory_attachments_assignments }o...o{ equipment_inventory_attachments_disposition
-equipment_inventory_attachments_assignments }o...o{ staff_personnel
-equipment_inventory_attachments_disposition }o...|| equipment_inventory_attachments_type
+equipment_inventory_attachments_assignments }|...|| equipment_inventory_attachments_disposition
+equipment_inventory_attachments_assignments }|...|| staff_personnel
+equipment_inventory_attachments_disposition }|...|| equipment_inventory_attachments_type
 }
 
 cloud "Administration" as administration {
@@ -166,13 +167,13 @@ entity "administration_permission_entries" {
     scope : enum('administrative', 'executive', 'logistics', 'inventory_holder', 'communication')
 }
 
-administration_trainings }o...o{ staff_personnel
-administration_trainings }o...o{ administration_trainings_topic
+administration_trainings }|...|| staff_personnel
+administration_trainings }|...|| administration_trainings_topic
 
-administration_deployment_records }o...o{ staff_personnel
+administration_deployment_records }|...|| staff_personnel
 
-administration_permissions }o...o{ staff_personnel
-administration_permissions }o...o{ administration_permission_entries
+administration_permissions }|...|| staff_personnel
+administration_permissions }|...|| administration_permission_entries
 }
 }
 
@@ -204,9 +205,9 @@ entity "logistics_cargo" {
     created_at : timestamp
 }
 
-logistics_assignments }o...o{ logistics_route
-logistics_assignments }o...|| logistics_cargo
-logistics_assignments }o...o{ staff_personnel
+logistics_assignments }|...|| logistics_route
+logistics_assignments }|...|| logistics_cargo
+logistics_assignments }|...|| staff_personnel
 
 }
 
@@ -258,15 +259,15 @@ entity "communication_equipment_inventory_journal_topic" {
     name : varchar<20>
 }
 
-communication_logistics_journal }o...o{ logistics_assignments
-communication_logistics_journal }o...o{ communication_logistics_journal_topic
-communication_logistics_journal }o...o{ staff_personnel
+communication_logistics_journal }|...|| logistics_assignments
+communication_logistics_journal }|...|| communication_logistics_journal_topic
+communication_logistics_journal }|...|| staff_personnel
 
-communication_administration_journal }o...o{ communication_administration_journal_topic
-communication_administration_journal }o...o{ staff_personnel
+communication_administration_journal }|...|| communication_administration_journal_topic
+communication_administration_journal }|...|| staff_personnel
 
-communication_equipment_inventory_journal }o...o{ communication_equipment_inventory_journal_topic
-communication_equipment_inventory_journal }o...o{ staff_personnel
+communication_equipment_inventory_journal }|...|| communication_equipment_inventory_journal_topic
+communication_equipment_inventory_journal }|...|| staff_personnel
 }
 
 footer "Topology represents only one military base out of global topology structure"

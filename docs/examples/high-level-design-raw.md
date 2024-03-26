@@ -3,7 +3,7 @@
 skinparam linetype ortho
 
 title 
-    Detailed design of "Army Supplement Management" 
+    High level design of "Army Supplement Management" 
 end title
 
 header
