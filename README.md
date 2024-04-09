@@ -1,7 +1,5 @@
 # ArmySupplementManagement
 
-[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
-
 ## General Information
 
 An army supplement management database topology, which describes main army management structure for one exact military base out of the external topology context.
@@ -82,28 +80,28 @@ In order to gain logical isolation of data all the top-tier structures are separ
 
 ## Relation
 
-* _staff_personnel_ **zero or many to zero or many** _staff_rank_
-* _equipment_inventory_arms_assignments_ **zero or many to zero or many** _equipment_inventory_arms_disposition_
-* _equipment_inventory_arms_assignments_ **zero or many to zero or many** _staff_personnel_
-* _equipment_inventory_arms_disposition_ **zero or many to exactly one** _equipment_inventory_arms_type_
-* _equipment_inventory_vehicles_assignments_ **zero or many to zero or many** _equipment_inventory_vehicles_disposition_
-* _equipment_inventory_vehicles_assignments_ **zero or many to zero or many** _staff_personnel_
-* _equipment_inventory_vehicles_disposition_ **zero or many to exactly one** _equipment_inventory_vehicles_type_
-* _equipment_inventory_attachments_assignments_ **zero or many to zero or many** _equipment_inventory_attachments_disposition_
-* _equipment_inventory_attachments_assignments_ **zero or many to zero or many** _staff_personnel_
-* _equipment_inventory_attachments_disposition_ **zero or many to exactly one** _equipment_inventory_attachments_type_
-* _logistics_assignments_ **zero or many to zero or many** _logistics_route_
-* _logistics_assignments_ **zero or many to exactly one** _logistics_cargo_
-* _logistics_assignments_ **zero or many to zero or many** _staff_personnel_
-* _communication_logistics_journal_ **zero or many to zero or many** _logistics_assignments_
-* _communication_logistics_journal_ **zero or many to zero or many** _communication_logistics_journal_topic_
-* _communication_logistics_journal_ **zero or many to zero or many** _staff_personnel_
-* _communication_administration_journal_ **zero or many to zero or many** _communication_administration_journal_topic_
-* _communication_administration_journal_ **zero or many to zero or many** _staff_personnel_
-* _communication_equipment_inventory_journal_ **zero or many to zero or many** _communication_equipment_inventory_journal_topic_
-* _communication_equipment_inventory_journal_ **zero or many to zero or many** _staff_personnel_
-* _administration_trainings_ **zero or many to zero or many** _staff_personnel_
-* _administration_trainings_ **zero or many to zero or many** _administration_trainings_topic_
-* _administration_deployment_records_ **zero or many to zero or many** _staff_personnel_
-* _administration_permissions_ **zero or many to zero or many** _staff_personnel_
-* _administration_permissions_ **zero or many to zero or many** _administration_permission_entries_
+* _staff_personnel_ **one or many to exactly one** _staff_rank_
+* _equipment_inventory_arms_assignments_ **one or many to exactly one** _equipment_inventory_arms_disposition_
+* _equipment_inventory_arms_assignments_ **one or many to exactly one** _staff_personnel_
+* _equipment_inventory_arms_disposition_ **one or many to exactly one** _equipment_inventory_arms_type_
+* _equipment_inventory_vehicles_assignments_ **one or many to exactly one** _equipment_inventory_vehicles_disposition_
+* _equipment_inventory_vehicles_assignments_ **one or many to exactly one** _staff_personnel_
+* _equipment_inventory_vehicles_disposition_ **one or many to exactly one** _equipment_inventory_vehicles_type_
+* _equipment_inventory_attachments_assignments_ **one or many to exactly one** _equipment_inventory_attachments_disposition_
+* _equipment_inventory_attachments_assignments_ **one or many to exactly one** _staff_personnel_
+* _equipment_inventory_attachments_disposition_ **one or many to exactly one** _equipment_inventory_attachments_type_
+* _logistics_assignments_ **one or many to exactly one** _logistics_route_
+* _logistics_assignments_ **one or many to exactly one** _logistics_cargo_
+* _logistics_assignments_ **one or many to exactly one** _staff_personnel_
+* _communication_logistics_journal_ **one or many to exactly one** _logistics_assignments_
+* _communication_logistics_journal_ **one or many to exactly one** _communication_logistics_journal_topic_
+* _communication_logistics_journal_ **one or many to exactly one** _staff_personnel_
+* _communication_administration_journal_ **one or many to exactly one** _communication_administration_journal_topic_
+* _communication_administration_journal_ **one or many to exactly one** _staff_personnel_
+* _communication_equipment_inventory_journal_ **one or many to exactly one** _communication_equipment_inventory_journal_topic_
+* _communication_equipment_inventory_journal_ **one or many to exactly one** _staff_personnel_
+* _administration_trainings_ **one or many to exactly one** _staff_personnel_
+* _administration_trainings_ **one or many to exactly one** _administration_trainings_topic_
+* _administration_deployment_records_ **one or many to exactly one** _staff_personnel_
+* _administration_permissions_ **one or many to exactly one** _staff_personnel_
+* _administration_permissions_ **one or many to exactly one** _administration_permission_entries_

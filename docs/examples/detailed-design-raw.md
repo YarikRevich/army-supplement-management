@@ -16,11 +16,10 @@ header
 Diagram may be updated.
 endheader
 
-cloud "Staff" as staff {
+cloud "\l\lStaff" as staff {
 
 entity "staff_personnel" {
     *id : number <<PK>>
-    *rank : number <<FK>> # staff_rank(id)
     --
     name : varchar<20>
     surname : varchar<20>
@@ -38,26 +37,22 @@ entity "staff_rank" {
     name : varchar<20>
 }
 
-staff_personnel }|...|| staff_rank
+staff_personnel }|...|| staff_rank #red : <color:red>is assigned as
 
 }
 
 together {
-cloud "Equipment inventory" as equipment_inventory {
+cloud "\l\l\l\lEquipment inventory" as equipment_inventory {
 
 entity "equipment_inventory_arms_assignments" {
     *id : number <<PK>>
-    *item : number <<FK>> # equipment_inventory_arms_disposition(id)
-    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
 
 entity "equipment_inventory_arms_disposition" {
     *id : number <<PK>>
-    *type : number <<FK>> # equipment_inventory_arms_type(id)
     --
-    quantity : number
 }
 
 entity "equipment_inventory_arms_type" {
@@ -69,17 +64,13 @@ entity "equipment_inventory_arms_type" {
 
 entity "equipment_inventory_vehicles_assignments" {
     *id : number <<PK>>
-    *item : number <<FK>> # equipment_inventory_vehicles_disposition(id)
-    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
 
 entity "equipment_inventory_vehicles_disposition" {
     *id : number <<PK>>
-    *type : number <<FK>> # equipment_inventory_vehicles_type(id)
     --
-    quantity : number
 }
 
 entity "equipment_inventory_vehicles_type" {
@@ -92,17 +83,13 @@ entity "equipment_inventory_vehicles_type" {
 
 entity "equipment_inventory_attachments_assignments" {
     *id : number <<PK>>
-    *item : number <<FK>> # equipment_inventory_attachments_disposition(id)
-    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
 
 entity "equipment_inventory_attachments_disposition" {
     *id : number <<PK>>
-    *type : number <<FK>> # equipment_inventory_attachments_type(id)
     --
-    quantity : number
 }
 
 entity "equipment_inventory_attachments_type" {
@@ -112,26 +99,22 @@ entity "equipment_inventory_attachments_type" {
     compatability : varchar<10>
 }
 
-equipment_inventory_arms_assignments }|...|| equipment_inventory_arms_disposition
-equipment_inventory_arms_assignments }|...|| staff_personnel
-equipment_inventory_arms_disposition }|...|| equipment_inventory_arms_type
+equipment_inventory_arms_assignments }|...|| equipment_inventory_arms_disposition #green : <color:green>allocates
+equipment_inventory_arms_assignments }|...|| staff_personnel #green : <color:green>is issued to
+equipment_inventory_arms_disposition }|...|| equipment_inventory_arms_type #green : <color:green>represents
 
-equipment_inventory_vehicles_assignments }|...|| equipment_inventory_vehicles_disposition
-equipment_inventory_vehicles_assignments }|...|| staff_personnel
-equipment_inventory_vehicles_disposition }|...|| equipment_inventory_vehicles_type
+equipment_inventory_vehicles_assignments }|...|| equipment_inventory_vehicles_disposition #green : <color:green>allocates
+equipment_inventory_vehicles_assignments }|...|| staff_personnel #green : <color:green>is issued to
+equipment_inventory_vehicles_disposition }|...|| equipment_inventory_vehicles_type #green : <color:green>represents
 
-equipment_inventory_attachments_assignments }|...|| equipment_inventory_attachments_disposition
-equipment_inventory_attachments_assignments }|...|| staff_personnel
-equipment_inventory_attachments_disposition }|...|| equipment_inventory_attachments_type
+equipment_inventory_attachments_assignments }|...|| equipment_inventory_attachments_disposition #green : <color:green>allocates
+equipment_inventory_attachments_assignments }|...|| staff_personnel #green : <color:green>is issued to
+equipment_inventory_attachments_disposition }|...|| equipment_inventory_attachments_type #green : <color:green>represents
 }
 
-cloud "Administration" as administration {
+cloud "\l\lAdministration" as administration {
 entity "administration_trainings" {
     *id : number <<PK>>
-    *approved_by : number <<FK>> # staff_personnel(id) == administrative
-    *initiated_by : number <<FK>> # staff_personnel(id) == administrative
-    *subordinate : number <<FK>> # staff_personnel(id)
-    *topic : number <<FK>> # administration_trainings_topic(id)
     --
     till : timestamp 
     since : timestamp
@@ -146,7 +129,6 @@ entity "administration_trainings_topic" {
 
 entity "administration_deployment_records" {
     *id : number <<PK>>
-    *approved_by : number <<FK>> # staff_personnel(id) == administrative
     --
     facility : location
     till : timestamp
@@ -155,8 +137,6 @@ entity "administration_deployment_records" {
 
 entity "administration_permissions" {
     *id : number <<PK>>
-    *approved_by : number <<FK>> # staff_personnel(id) == administrative
-    *entry : number <<FK>> # administration_permission_entries(id)
     --
 }
 
@@ -167,23 +147,22 @@ entity "administration_permission_entries" {
     scope : enum('administrative', 'executive', 'logistics', 'inventory_holder', 'communication')
 }
 
-administration_trainings }|...|| staff_personnel
-administration_trainings }|...|| administration_trainings_topic
+administration_trainings }|...|| staff_personnel #blue : <color:blue>approved by
+administration_trainings }|...|| staff_personnel #blue : <color:blue>initiated by
+administration_trainings }|...|| staff_personnel #blue : <color:blue>subordinate
+administration_trainings }|...|| administration_trainings_topic #blue : <color:blue>is about
 
-administration_deployment_records }|...|| staff_personnel
+administration_deployment_records }|...|| staff_personnel #blue : <color:blue>approved by
 
-administration_permissions }|...|| staff_personnel
-administration_permissions }|...|| administration_permission_entries
+administration_permissions }|...|| staff_personnel #blue : <color:blue>approved by
+administration_permissions }|...|| administration_permission_entries #blue : <color:blue>is type of
 }
 }
 
-cloud "Logistics" as logistics {
+cloud "\l\lLogistics" as logistics {
 
 entity "logistics_assignments" {
     *id : number <<PK>>
-    *route : number <<FK>> # logistics_route(id)
-    *cargo : number <<FK>> # logistics_cargo(id)
-    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
@@ -205,20 +184,16 @@ entity "logistics_cargo" {
     created_at : timestamp
 }
 
-logistics_assignments }|...|| logistics_route
-logistics_assignments }|...|| logistics_cargo
-logistics_assignments }|...|| staff_personnel
+logistics_assignments }|...|| logistics_route #magenta : <color:magenta>directs to
+logistics_assignments }|...|| logistics_cargo #magenta : <color:magenta>carries
+logistics_assignments }|...|| staff_personnel #magenta : <color:magenta>delivered by
 
 }
 
-cloud "Communication" as communication {
+cloud "\l\l\lCommunication" as communication {
 
 entity "communication_logistics_journal" {
     *id : number <<PK>>
-    *initiated_by : number <<FK>> # staff_personnel(id) == administrative
-    *subordinate : number <<FK>> # staff_personnel(id)
-    *assignment : number <<FK>> # logistics_assignments(id)
-    *topic : number <<FK>> # communication_logistics_journal_topic(id)
     --
     created_at : timestamp
 }
@@ -231,9 +206,6 @@ entity "communication_logistics_journal_topic" {
 
 entity "communication_administration_journal" {
     *id : number <<PK>>
-    *initiated_by : number <<FK>> # staff_personnel(id) == administrative
-    *subordinate : number <<FK>> # staff_personnel(id)
-    *topic : number <<FK>> # communication_administration_journal_topic(id)
     -- 
     created_at : timestamp
 }
@@ -246,9 +218,6 @@ entity "communication_administration_journal_topic" {
 
 entity "communication_equipment_inventory_journal" {
     *id : number <<PK>>
-    *initiated_by : number <<FK>> # staff_personnel(id) == administrative
-    *subordinate : number <<FK>> # staff_arm_holder(id)
-    *topic : number <<FK>> # communication_equipment_inventory_journal_topic(id)
     -- 
     created_at : timestamp
 }
@@ -259,15 +228,18 @@ entity "communication_equipment_inventory_journal_topic" {
     name : varchar<20>
 }
 
-communication_logistics_journal }|...|| logistics_assignments
-communication_logistics_journal }|...|| communication_logistics_journal_topic
-communication_logistics_journal }|...|| staff_personnel
+communication_logistics_journal }|...|| logistics_assignments #db006a : <color:#db006a>associated with
+communication_logistics_journal }|...|| communication_logistics_journal_topic #db006a : <color:#db006a>is about
+communication_logistics_journal }|...|| staff_personnel #db006a : <color:#db006a>initiated by
+communication_logistics_journal }|...|| staff_personnel #db006a : <color:#db006a>delivered by
 
-communication_administration_journal }|...|| communication_administration_journal_topic
-communication_administration_journal }|...|| staff_personnel
+communication_administration_journal }|...|| communication_administration_journal_topic #db006a : <color:#db006a>is about
+communication_administration_journal }|...|| staff_personnel #db006a : <color:#db006a>initiated by
+communication_administration_journal }|...|| staff_personnel #db006a : <color:#db006a>related to
 
-communication_equipment_inventory_journal }|...|| communication_equipment_inventory_journal_topic
-communication_equipment_inventory_journal }|...|| staff_personnel
+communication_equipment_inventory_journal }|...|| communication_equipment_inventory_journal_topic #db006a : <color:#db006a>is about
+communication_equipment_inventory_journal }|...|| staff_personnel #db006a : <color:#db006a>initiated by
+communication_equipment_inventory_journal }|...|| staff_personnel #db006a : <color:#db006a>assigned to
 }
 
 footer "Topology represents only one military base out of global topology structure"
