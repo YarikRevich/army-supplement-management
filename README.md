@@ -8,6 +8,8 @@ An army supplement management database topology, which describes main army manag
 
 ![](./docs/examples/detailed-design.png)
 
+![](./docs/examples/detailed-design-sql.png)
+
 In order to gain logical isolation of data all the top-tier structures are separated by prefix.
 
 > As the future update namespaces can be separated into different clusters using replication mechanism. The usage of namespace per instance approach gives an opportunity to allocate system resources specific to each database(namespace).
