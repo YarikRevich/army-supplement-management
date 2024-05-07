@@ -118,6 +118,7 @@ entity "staff_rank" {
 
 entity "staff_personnel" {
     *id : number <<PK>>
+    *rank : number <<FK>> # staff_rank(id)
     --
     name : varchar<20>
     surname : varchar<20>
