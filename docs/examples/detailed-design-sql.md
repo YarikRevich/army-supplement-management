@@ -15,7 +15,7 @@ cloud "\l\lEquipment inventory" as equipment_inventory {
 entity "equipment_inventory_arms_assignments" {
     *id : number <<PK>>
     *item : number <<FK>> # equipment_inventory_arms_disposition(id)
-    *assignee : number <<FK>> # staff_inventory_holders(id)
+    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
@@ -36,7 +36,7 @@ entity "equipment_inventory_arms_type" {
 entity "equipment_inventory_vehicles_assignments" {
     *id : number <<PK>>
     *item : number <<FK>> # equipment_inventory_vehicles_disposition(id)
-    *assignee : number <<FK>> # staff_inventory_holders(id)
+    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
@@ -58,7 +58,7 @@ entity "equipment_inventory_vehicles_type" {
 entity "equipment_inventory_attachments_assignments" {
     *id : number <<PK>>
     *item : number <<FK>> # equipment_inventory_attachments_disposition(id)
-    *assignee : number <<FK>> # staff_inventory_holders(id)
+    *assignee : number <<FK>> # staff_personnel(id)
     --
     created_at : timestamp
 }
