@@ -153,8 +153,10 @@ administration_trainings }|...|| staff_personnel #blue : <color:blue>subordinate
 administration_trainings }|...|| administration_trainings_topic #blue : <color:blue>is about
 
 administration_deployment_records }|...|| staff_personnel #blue : <color:blue>approved by
+administration_deployment_records }|...|| staff_personnel #blue : <color:blue>subordinate
 
 administration_permissions }|...|| staff_personnel #blue : <color:blue>approved by
+administration_permissions }|...|| staff_personnel #blue : <color:blue>subordinate
 administration_permissions }|...|| administration_permission_entries #blue : <color:blue>is type of
 }
 }

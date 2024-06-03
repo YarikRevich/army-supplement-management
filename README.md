@@ -107,3 +107,7 @@ In order to gain logical isolation of data all the top-tier structures are separ
 * _administration_deployment_records_ **one or many to exactly one** _staff_personnel_
 * _administration_permissions_ **one or many to exactly one** _staff_personnel_
 * _administration_permissions_ **one or many to exactly one** _administration_permission_entries_
+
+## Normalization
+
+Normalization was not required, because all of the entities have already been transformed to 3NF(normalization form).

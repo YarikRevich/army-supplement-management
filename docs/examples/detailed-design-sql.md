@@ -92,9 +92,10 @@ entity "logistics_assignments" {
 entity "logistics_route" {
     *id : number <<PK>>
     --
-    from : location
-    to : location
-
+    from_longitude : double
+    from_latitude : double
+    to_longitude : double
+    to_latitude : double
 }
 
 entity "logistics_cargo" {
@@ -203,8 +204,10 @@ entity "administration_trainings_topic" {
 entity "administration_deployment_records" {
     *id : number <<PK>>
     *approved_by : number <<FK>> # staff_personnel(id)
+    *subordinate : number <<FK>> # staff_personnel(id)
     --
-    facility : location
+    facility_longitude : double
+    facility_latitude : double
     till : timestamp
     since : timestamp
 }
@@ -212,6 +215,7 @@ entity "administration_deployment_records" {
 entity "administration_permissions" {
     *id : number <<PK>>
     *approved_by : number <<FK>> # staff_personnel(id)
+    *subordinate : number <<FK>> # staff_personnel(id)
     *entry : number <<FK>> # administration_permission_entries(id)
     --
 }
